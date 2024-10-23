@@ -7,23 +7,28 @@ import java.util.Random;
 
 public class NumberGuesser{
 
-    public class randomGenerator{
-        
+    public static Integer randomGenerator(){
+        Random rand = new Random();
+        int randomNumberGenerated = rand.nextInt(999999);
+        return randomNumberGenerated;
+    }
 
+    public static void writeToFile(String thingsToWrite) throws IOException{
+        FileWriter fWriter = new FileWriter("correctAnswer.txt");
+        fWriter.write(thingsToWrite);
+        fWriter.close();
     }
 
     public static void main(String[] args) throws IOException {
         
         String userInput = "";
         ArrayList<String> userInputHistory = new ArrayList<String>();
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(999999);
+        Integer randomNumber = randomGenerator();
+       
         File file = new File(System.getProperty("user.dir"),"correctAnswer.txt");
         file.createNewFile();
-        FileWriter fWriter = new FileWriter("correctAnswer.txt");
-        fWriter.write(String.valueOf(randomNumber));
-        fWriter.close();
 
+        writeToFile(String.valueOf(randomNumber));
 
         while(!userInput.equals("quit")){
 
@@ -33,11 +38,13 @@ public class NumberGuesser{
             if(Integer.parseInt(userInput) == randomNumber){
                 System.out.println("You guessed the correct number! The number was:" + randomNumber);
                 System.out.println("Restarting game! Guess the new Number!");
-                randomNumber = rand.nextInt(999999);
+                randomNumber = randomGenerator();
+                writeToFile(String.valueOf(randomNumber));
                 
+                continue;
 
             }
-
+            
             if(Integer.parseInt(userInput) < randomNumber){
                 System.out.println("Your guess is lower than the number!" + randomNumber);
                 System.out.println("Your guesses so far were:" + userInputHistory);
