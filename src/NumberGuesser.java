@@ -1,3 +1,5 @@
+
+
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,8 +18,8 @@ public class NumberGuesser{
     }
 
     public static void writeToFile(String thingsToWrite) throws IOException{
-        FileWriter fWriter = new FileWriter("correctAnswer.txt");
-        fWriter.write(thingsToWrite);
+        FileWriter fWriter = new FileWriter("correctAnswer.txt",true);//adding true will make it append instead of writing over.
+        fWriter.write("\n" + thingsToWrite);
         fWriter.close();
     }
 
@@ -26,7 +28,9 @@ public class NumberGuesser{
         while(scanner.hasNextLine()){
             String fileOutput = scanner.nextLine();
             System.out.println("The output from the txt file is:" + fileOutput);
+
         }
+        scanner.close();
 
     }
 
@@ -65,7 +69,8 @@ public class NumberGuesser{
                 System.out.println("Your guess is higher than the number!");
                 System.out.println("Your guesses so far were:" + userInputHistory);
             }
-            
+
+            //writeToFile(String.valueOf(userInputHistory));
             readFile(file);
 
 
