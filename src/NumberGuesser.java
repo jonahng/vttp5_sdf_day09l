@@ -1,9 +1,11 @@
 import java.io.Console;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class NumberGuesser{
 
@@ -17,6 +19,15 @@ public class NumberGuesser{
         FileWriter fWriter = new FileWriter("correctAnswer.txt");
         fWriter.write(thingsToWrite);
         fWriter.close();
+    }
+
+    public static void readFile(File file) throws FileNotFoundException{
+        Scanner scanner = new Scanner(file);
+        while(scanner.hasNextLine()){
+            String fileOutput = scanner.nextLine();
+            System.out.println("The output from the txt file is:" + fileOutput);
+        }
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -54,6 +65,8 @@ public class NumberGuesser{
                 System.out.println("Your guess is higher than the number!");
                 System.out.println("Your guesses so far were:" + userInputHistory);
             }
+            
+            readFile(file);
 
 
 
