@@ -14,6 +14,7 @@ public class ConsoleInputTemplate{
             System.out.println("You typed: " + userInput);
 
         }
+        
     }
 
 
